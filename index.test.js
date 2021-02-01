@@ -12,7 +12,7 @@ describe('account type checker', () => {
   it('should sort array into correct order', () => {
     expect(accountTypeChecker(typeMixedDatesTypeA)).toBe("A")
   })
-  it('should throw error when argument passed is not in correct format', () => {
+  it('should throw error when argument passed is not an array', () => {
     expect(() => accountTypeChecker('this should throw an error')).toThrow()
   })
   it('should throw error when argument length is not greater than 2', () => {

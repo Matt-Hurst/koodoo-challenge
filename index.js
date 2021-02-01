@@ -1,7 +1,5 @@
 const accountTypeChecker = (accountBalanceHistory) => {
-
-  // helper function to access monthly balance amounts
-  const getBalance = (month) => {
+  const getBalance = (month) => { // helper function to access monthly balance amounts
     return month.account.balance.amount
   }
   try {
@@ -22,9 +20,3 @@ const accountTypeChecker = (accountBalanceHistory) => {
 };
 
 module.exports = accountTypeChecker;
-
-// Things to consider in your solution 🤔
-// Does it solve the basic case?
-// What other cases might need to be considered?
-// TODO: parse data? Balance goes up by the same difference? 
-// What unit tests might you write for this type of function?
