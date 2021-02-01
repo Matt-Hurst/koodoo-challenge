@@ -1,24 +1,24 @@
 const accountTypeChecker = (accountBalanceHistory) => {
-  /***
-  Your goal is to write a function that determines from someone's ${accountBalanceHistory} 🧾 (see the array above for an example)
-  whether this array is of type A (variable) or type B (fixed).
 
-  Type 🅰 denotes a balance history where the balance amount decreases by varying amounts each month.
-
-  Type 🅱 is one where the balance amount changes by the same amount each month.
-  ***/
-
-  // Write your logic here  - No pressure 😁 //
-  let result;
-
-  // sort array based on month
-
-  // work out difference from end of array e.g. diff = arr[arr.length - 1] - arr[arr.length - 2]
-
-  // for loop from arr.length - 2 down, work out difference vs next in chain, 
-    // if !== diff then set result to false and break loop.
-
-  return result ? "A" : "B";
+  // helper function to access monthly balance amounts
+  const getBalance = (month) => {
+    return month.account.balance.amount
+  }
+  try {
+    if (accountBalanceHistory.length < 3) throw new Error('insufficient data, require at least three months of data');
+    accountBalanceHistory.sort((a, b) => a.monthNumber - b.monthNumber);
+    let typeA = true;
+    let difference = getBalance(accountBalanceHistory[accountBalanceHistory.length - 1]) - getBalance(accountBalanceHistory[accountBalanceHistory.length - 2]);
+    for (let i = accountBalanceHistory.length - 2; i > 0; i--) {
+      if (getBalance(accountBalanceHistory[i]) - getBalance(accountBalanceHistory[i - 1]) !== difference) {
+        typeA = false;
+        break;
+      }
+    };
+    return typeA ? "A" : "B";   
+  } catch (error) {
+    throw Error(error);
+  }
 };
 
 module.exports = accountTypeChecker;
@@ -28,6 +28,3 @@ module.exports = accountTypeChecker;
 // What other cases might need to be considered?
 // TODO: parse data? Balance goes up by the same difference? 
 // What unit tests might you write for this type of function?
-// We're not looking for a 100% full proof solution (which might not exist anyway depending on the use case).
-
-// You should provide your solution by submitting your code in the form of a GitHub repository. 🤝
